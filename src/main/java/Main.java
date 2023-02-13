@@ -1,24 +1,32 @@
-import okhttp3.*;
+import com.fasterxml.jackson.core.JacksonException;
+import mapper.JsonMapper;
+import reader.HttpReader;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
   public static void main(String[] args) {
 
-    String url = "https://api.github.com/users/masahiro-ikeda/repos";
-    String token = "secret-token";
-    OkHttpClient client = new OkHttpClient();
+    HttpReader reader = new HttpReader();
+    JsonMapper mapper = new JsonMapper();
 
     try {
-      Request request = new Request.Builder()
-          .url(url)
-          .addHeader("Authorization", String.format("token %s", token))
-          .build();
-      Response response = client.newCall(request).execute();
+      // 読み込み
+      String json = reader.read();
 
-      System.out.println(response.body().string());
+      // 変換
+      List<String> results = mapper.map(json);
+
+      // 出力
+      results.forEach(System.out::println);
+
+    } catch (JacksonException e) {
+      System.out.println("json変換に失敗");
+      e.printStackTrace();
     } catch (IOException e) {
+      System.out.println("httpアクセスに失敗");
       e.printStackTrace();
     }
   }

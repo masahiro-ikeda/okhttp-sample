@@ -1,3 +1,4 @@
 # okhttp-sample
 
-okhttpを使ってgetアクセスするサンプルです。
+- okhttpを使ってgetアクセスする
+- jaksonを使ってjsonをオブジェクトに変換する
