@@ -13,7 +13,7 @@ public class HttpReader {
    */
   public String read() throws IOException {
     String url = "https://api.github.com/users/masahiro-ikeda/repos";
-    String token = "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";
+    String token = "secret-token";
     OkHttpClient client = new OkHttpClient();
 
     Request request = new Request.Builder()
