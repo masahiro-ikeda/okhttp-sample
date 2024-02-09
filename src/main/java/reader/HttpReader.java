@@ -11,14 +11,13 @@ public class HttpReader {
   /**
    * httpクライアント部分.
    */
-  public String read() throws IOException {
+  public String read(String accessToken) throws IOException {
     String url = "https://api.github.com/users/masahiro-ikeda/repos";
-    String token = "secret-token";
     OkHttpClient client = new OkHttpClient();
 
     Request request = new Request.Builder()
         .url(url)
-        .addHeader("Authorization", String.format("token %s", token))
+        .addHeader("Authorization", String.format("token %s", accessToken))
         .build();
 
     try (Response response = client.newCall(request).execute()) {

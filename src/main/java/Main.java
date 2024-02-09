@@ -12,9 +12,11 @@ public class Main {
     HttpReader reader = new HttpReader();
     JsonMapper mapper = new JsonMapper();
 
+    String accessToken = args[0];
+
     try {
       // 読み込み
-      String json = reader.read();
+      String json = reader.read(accessToken);
 
       // 変換
       List<String> results = mapper.map(json);
